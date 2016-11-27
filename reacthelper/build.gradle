@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion project.sdk
+    buildToolsVersion project.buildTools
+
+    defaultConfig {
+        minSdkVersion project.minSdk
+        targetSdkVersion project.sdk
+        versionCode project.libraryVersionCode
+        versionName project.libraryVersion
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    testCompile 'junit:junit:4.12'
+
+    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'RxJava2Helper'
+    orgName = 'aykuttasil'
+
+    publishedGroupId = 'com.aykuttasil'
+    libraryName = 'RxJava2Helper'
+    artifact = 'reacthelper' // module ile aynı isimde olması gerekiyor
+
+    libraryDescription = 'Android RxJava2 Helper'
+
+    siteUrl = 'https://github.com/aykuttasil/ReactHelper'
+    gitUrl = 'https://github.com/aykuttasil/ReactHelper.git'
+
+    libraryVersion = rootProject.ext.libraryVersion
+
+    developerId = 'aykuttasil'
+    developerName = 'Aykut Asil'
+    developerEmail = 'aykuttasil@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: rootProject.file('gradle/install-v1.gradle')
+    apply from: rootProject.file('gradle/bintray-android-v1.gradle')
+}
+
+
+// ./gradlew clean install bintrayUpload
+
