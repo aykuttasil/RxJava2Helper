@@ -51,8 +51,8 @@ ext {
 
     libraryDescription = 'Android RxJava2 Helper'
 
-    siteUrl = 'https://github.com/aykuttasil/ReactHelper'
-    gitUrl = 'https://github.com/aykuttasil/ReactHelper.git'
+    siteUrl = 'https://github.com/aykuttasil/RxJava2Helper'
+    gitUrl = 'https://github.com/aykuttasil/RxJava2Helper.git'
 
     libraryVersion = rootProject.ext.libraryVersion
 
